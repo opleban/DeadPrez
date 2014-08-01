@@ -1,4 +1,4 @@
-
+require 'sinatra'
 require 'twilio-ruby' 
  
 # #credentials
@@ -20,23 +20,24 @@ end
 def create_message(quote, name)
     quote.gsub!("{{name}}", name)
 end
- 
-quote = '{{name}}, there is no room in this country for our passion. -President Roosevelt.'
-puts "Welcome to Dead Presidents"
+get '/' do 
+    quote = '{{name}}, there is no room in this country for our passion. -President Roosevelt.'
+    puts "Welcome to Dead Presidents"
 
-puts "Who would you like to send a message to?"
-print "Enter your friend's name here:  "
+    puts "Who would you like to send a message to?"
+    print "Enter your friend's name here:  "
 
-recipient = gets.chomp
-puts
+    recipient = gets.chomp
+    puts
 
-invalid = true
-while invalid
-    print "Enter their phone number with here:  "
-    number = gets.chomp
-    invalid = false if number.length == 10
+    invalid = true
+    while invalid
+        print "Enter their phone number with here:  "
+        number = gets.chomp
+        invalid = false if number.length == 10
+    end
+
+    message = create_message(quote, recipient)
+    send_message(message, number)
 end
-
-message = create_message(quote, recipient)
-send_message(message, number)
 
