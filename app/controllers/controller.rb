@@ -1,20 +1,20 @@
 require 'sinatra'
 require_relative '../view'
-require 'twilio-ruby' 
+require 'twilio-ruby'
 
 module Controller
   include View
   extend self
 
   def send_message(message, number)
-    account_sid = 'ACe0f382eb45a66d4149b9d5cceb3db62a' 
-    auth_token = '1c077e860040c141dc74877ad88e196b' 
-    @client = Twilio::REST::Client.new account_sid, auth_token 
+    account_sid = 'ACe0f382eb45a66d4149b9d5cceb3db62a'
+    auth_token = '1c077e860040c141dc74877ad88e196b'
+    @client = Twilio::REST::Client.new account_sid, auth_token
 
     @client.account.messages.create({
-      :from => '+18144097739', 
-      :to => number, 
-      :body => message,  
+      :from => '+18144097739',
+      :to => number,
+      :body => message,
       })
   end
 
@@ -23,10 +23,10 @@ module Controller
   end
 
   def get_recipient_name
-    default_name = ["buddy", "bro", "friend", "countryman", "fellow patriot"]
+    default_name = ["buddy", "bro", "friend", "countryman", "fellow patriot", "champ", "chief"].sample
     View.prompt_for_recipient
     recipient = gets.chomp
-    recipient.split(/ /)[0] || default_name.sample
+    recipient.split(/ /)[0] || default_name
   end
 
   def get_recipient_number
@@ -55,9 +55,9 @@ module Controller
 
   def ask_for_confirmation(recipient, number)
     puts "Are you sure you'd like to send a message from a dead president to #{recipient} at #{number}?"
-    print "yes or no?  "
+    print "yes or no?:  "
     y_or_n = gets.chomp
-    exit if ["no", "n"].include?(y_or_n.downcase) 
+    exit if ["no", "n"].include?(y_or_n.downcase)
   end
 
 
