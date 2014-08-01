@@ -57,7 +57,7 @@ module View
     puts
     puts
     pause_then_reveal
-    puts "#{message}"
+    puts "\"#{message}\""
     puts
     puts "This message was sent to #{name} at #{number}"
   end

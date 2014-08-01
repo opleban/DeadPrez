@@ -23,19 +23,21 @@ module Controller
   end
 
   def get_recipient_name
-    default_name = ["buddy", "bro", "friend", "countryman", "fellow patriot"]
+    default_name = ["Buddy", "Bro", "Friend", "Countryman", "Fellow Patriot", "Slugger"]
     View.prompt_for_recipient
     recipient = gets.chomp
-    recipient || default_name.sample
+    recipient.empty? ? default_name.sample : recipient
   end
 
   def get_recipient_number
     valid = false
-    while true
+
+    View.prompt_for_number
+    num = gets.chomp
+    until valid_number?(num)
+      View.bad_number
       View.prompt_for_number
       num = gets.chomp
-      break if valid_number?(num)
-      View.bad_number
     end
     num
   end
