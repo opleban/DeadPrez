@@ -62,8 +62,7 @@ module Controller
   end
 
   def log_call(name, number, quote)
-    log = CallLog.create(name: name, number: number, president: quote.president)
-    p "#{log.name} #{log.president}"
+    CallLog.create(name: name, number: number, president: quote.president)
   end
 
 
