@@ -1,6 +1,14 @@
 module View
   extend self
 
+  def print_latin_motto
+    "'E Pluribus, Texts'".each_char do |char|
+      print char
+      sleep(0.1)
+    end
+    puts
+  end
+
   def welcome
     puts "-------------------------------------------------"
     puts "          Welcome to Dead Presidents"
@@ -8,14 +16,15 @@ module View
 
     sleep(1)
     puts
-    puts "             'E Pluribus, Texts'"
+    print "             "
+    print_latin_motto
     puts
-    puts
-    sleep(1)
+    sleep(0.2)
 
     puts "-------------------------------------------------"
     puts 
     puts "-------------------------------------------------"
+    sleep(1)
   end
 
   def prompt_for_recipient
