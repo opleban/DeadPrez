@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 require 'sinatra'
+=======
+require_relative 'view'
+>>>>>>> a93d8ca9c2e28cdd843d18d18a328b205264da28
 require 'twilio-ruby' 
  
 # #credentials
@@ -20,12 +24,17 @@ end
 def create_message(quote, name)
     quote.gsub!("{{name}}", name)
 end
+<<<<<<< HEAD
 get '/' do 
     quote = '{{name}}, there is no room in this country for our passion. -President Roosevelt.'
     puts "Welcome to Dead Presidents"
 
     puts "Who would you like to send a message to?"
     print "Enter your friend's name here:  "
+=======
+ 
+View.welcome
+>>>>>>> a93d8ca9c2e28cdd843d18d18a328b205264da28
 
     recipient = gets.chomp
     puts
