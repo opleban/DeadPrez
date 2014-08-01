@@ -23,11 +23,6 @@ module View
     print "Enter your friend's name here:  "
   end
 
-  def format_number(number)
-    number_match = number.match(/(\d{3})(\d{3})(\d{4})/)
-    "(#{number_match[1]})-#{number_match[2]}-#{number_match[3]}"
-  end
-
   def confirm_message(name, message, number)
     puts "Your message is enroute."
     puts "-------------------------------------------------"
@@ -41,6 +36,8 @@ module View
     puts "-------------------------------------------------"
     sleep(1)
     puts "Huzzah!" 
+    puts
+    puts
     puts "#{message}"
     puts "This message was sent to #{name} at #{number}"
   end
