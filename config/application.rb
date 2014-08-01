@@ -5,6 +5,7 @@ require 'logger'
 require_relative '../app/controllers/controller'
 require_relative '../app/models/presidents'
 require_relative '../app/models/quotes'
+require_relative '../app/models/call_log'
 require_relative '../app/view'
 
 
