@@ -1,14 +1,6 @@
 require 'sinatra'
-require_relative 'view'
+require_relative '../view'
 require 'twilio-ruby' 
-
-
-def create_message(quote, name)
-  quote.gsub!("{{name}}", name)
-end
-
-
-View.welcome
 
 module Controller
   include View
@@ -24,37 +16,54 @@ module Controller
       :to => number, 
       :body => message,  
       })
-    end
+  end
+
+  def create_message(quote, name)
+    quote.gsub!("{{name}}", name)
   end
 
   def get_recipient_name
-    DEFAULT_NAME = ["buddy", "bro", "friend", "countryman", "fellow patriot"]
-    View.recipient_prompt
+    default_name = ["buddy", "bro", "friend", "countryman", "fellow patriot"]
+    View.prompt_for_recipient
     recipient = gets.chomp
-    recipient || DEFAULT_NAME.sample
+    recipient.split(/ /)[0] || default_name.sample
   end
 
   def get_recipient_number
     valid = false
-    loop do
+    while true
       print "Enter your friend's phone number here:  "
-      number = gets.chomp
-      break if number.valid
+      num = gets.chomp
+      break if valid_number?(num)
       puts "That number was invalid. Please enter a valid number."
     end
-    number
+    num
   end
 
   def valid_number?(number)
     /\d{10}\z/ =~ number ? true : false
   end
 
+  def get_random_quote
+    Quote.all.sample
+  end
+
+  def format_num(number)
+    p number
+    number_match = number.match(/(\d{3})(\d{3})(\d{4})/)
+    "(#{number_match[1]})-#{number_match[2]}-#{number_match[3]}"
+  end
+
+
   def run_main
     View.welcome
-    name = get_recipient_name
+    recipient = get_recipient_name
     number = get_recipient_number
-    message = self.create_message(quote, recipient)
-    Controller.send_message(message, number)
+    # quote = get_random_quote
+    quote = "{{name}}, the bridge is yours. -Capt. Jean Luc Picard"
+    message = create_message(quote, recipient)
+    # Controller.send_message(message, number)
+    View.confirm_message(recipient, message, format_num(number))
   end
 end
 
