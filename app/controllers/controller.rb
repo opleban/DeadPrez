@@ -76,7 +76,7 @@ module Controller
     confirm(recipient, formatted_number)
     Controller.send_message(message, number)
     log_call(recipient, number, quote)
-    View.confirm_message(recipient, message, format_num(number))
+    View.confirmation_message(recipient, message, format_num(number))
   end
 end
 

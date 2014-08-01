@@ -50,7 +50,7 @@ module View
     print "yes or no?  "
   end
 
-  def confirm_message(name, message, number)
+  def confirmation_message(name, message, number)
     puts "Your message is enroute."
     puts "-------------------------------------------------"
     puts 
