@@ -54,15 +54,23 @@ module Controller
     "(#{number_match[1]})-#{number_match[2]}-#{number_match[3]}"
   end
 
+  def ask_for_confirmation(recipient, number)
+    puts "Are you sure you'd like to send a message from a dead president to #{recipient} at #{number}?"
+    print "yes or no?  "
+    y_or_n = gets.chomp
+    exit if ["no", "n"].include?(y_or_n.downcase) 
+  end
+
 
   def run_main
     View.welcome
     recipient = get_recipient_name
     number = get_recipient_number
-    # quote = get_random_quote
-    quote = "{{name}}, the bridge is yours. -Capt. Jean Luc Picard"
+    quote = get_random_quote
     message = create_message(quote, recipient)
-    # Controller.send_message(message, number)
+    formatted_number = format_num(number)
+    ask_for_confirmation(message, recipient, formatted_number)
+    Controller.send_message(message, number)
     View.confirm_message(recipient, message, format_num(number))
   end
 end
