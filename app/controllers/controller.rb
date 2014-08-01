@@ -26,7 +26,7 @@ module Controller
     default_name = ["buddy", "bro", "friend", "countryman", "fellow patriot"]
     View.prompt_for_recipient
     recipient = gets.chomp
-    recipient.split(/ /)[0] || default_name.sample
+    recipient || default_name.sample
   end
 
   def get_recipient_number

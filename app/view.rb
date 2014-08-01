@@ -19,8 +19,13 @@ module View
   end
 
   def prompt_for_recipient
-    puts "Who would you like to send a message to?"
-    print "Enter your friend's name here:  "
+    puts "Whom would you like to send a message to?"
+    print "Enter your friend's first name here:  "
+  end
+
+  def pause_then_reveal
+    puts "Press enter to see message"
+    gets.chomp
   end
 
   def confirm_message(name, message, number)
@@ -38,6 +43,7 @@ module View
     puts "Huzzah!" 
     puts
     puts
+    pause_then_reveal
     puts "#{message}"
     puts "This message was sent to #{name} at #{number}"
   end
