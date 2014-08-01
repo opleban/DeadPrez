@@ -19,7 +19,7 @@ module Controller
   end
 
   def create_message(quote, name)
-    quote.gsub!("{{name}}", name)
+    quote.quote.gsub!("{{name}}", name) + "\n\nLove, #{quote.president.name}"
   end
 
   def get_recipient_name
@@ -49,9 +49,8 @@ module Controller
   end
 
   def format_num(number)
-    p number
     number_match = number.match(/(\d{3})(\d{3})(\d{4})/)
-    "(#{number_match[1]})-#{number_match[2]}-#{number_match[3]}"
+    "(#{number_match[1]}) #{number_match[2]}-#{number_match[3]}"
   end
 
   def ask_for_confirmation(recipient, number)
@@ -69,7 +68,7 @@ module Controller
     quote = get_random_quote
     message = create_message(quote, recipient)
     formatted_number = format_num(number)
-    ask_for_confirmation(message, recipient, formatted_number)
+    ask_for_confirmation(recipient, formatted_number)
     Controller.send_message(message, number)
     View.confirm_message(recipient, message, format_num(number))
   end
