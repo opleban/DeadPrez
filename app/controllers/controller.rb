@@ -61,6 +61,11 @@ module Controller
     exit if ["no", "n"].include?(y_or_n.downcase) 
   end
 
+  def log_call(name, number, quote)
+    log = CallLog.create(name: name, number: number, president: quote.president)
+    p "#{log.name} #{log.president}"
+  end
+
 
   def run_main
     View.welcome
@@ -71,6 +76,7 @@ module Controller
     formatted_number = format_num(number)
     confirm(recipient, formatted_number)
     Controller.send_message(message, number)
+    log_call(recipient, number, quote)
     View.confirm_message(recipient, message, format_num(number))
   end
 end
