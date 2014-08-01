@@ -36,7 +36,7 @@ end
 
 desc 'Start IRB with application environment loaded'
 task "console" do
-  exec "irb -r./config/application"
+  exec "irb -r./config/application -r./app/models/quotes -r./app/models/presidents -r csv"
 end
 
 desc "Run the specs"
