@@ -1,4 +1,4 @@
-
+require_relative 'view'
 require 'twilio-ruby' 
  
 # #credentials
@@ -21,11 +21,7 @@ def create_message(quote, name)
     quote.gsub!("{{name}}", name)
 end
  
-quote = '{{name}}, there is no room in this country for our passion. -President Roosevelt.'
-puts "Welcome to Dead Presidents"
-
-puts "Who would you like to send a message to?"
-print "Enter your friend's name here:  "
+View.welcome
 
 recipient = gets.chomp
 puts
