@@ -1,3 +1,3 @@
 require_relative 'config/application'
 
-controller.run_main
+Controller.run_main
